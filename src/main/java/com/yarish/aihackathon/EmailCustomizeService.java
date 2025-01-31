@@ -141,11 +141,6 @@ import org.springframework.stereotype.Service;
 
 
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import okhttp3.*;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 //@Service
 //public class EmailCustomizeService {
@@ -211,12 +206,6 @@ import org.springframework.stereotype.Service;
 
 //package com.yarish.aihackathon;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import okhttp3.*;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
 @Service
 public class EmailCustomizeService {
 
@@ -229,7 +218,8 @@ public class EmailCustomizeService {
 
             // Create OpenAI Request JSON
             String jsonPayload = "{"
-                    + "\"model\": \"gpt-4\","
+//                    + "\"model\": \"gpt-4\","
+                    + "\"model\": \"deepseek-coder-v2-lite-instruct-mlx\","
                     + "\"messages\": [{\"role\": \"user\", \"content\": \"Customize this email: '"
                     + emailContent + "' for this scenario: '"
                     + prompt + "'\"}],"
@@ -243,7 +233,8 @@ public class EmailCustomizeService {
 
             // Send POST Request to OpenAI
             Request request = new Request.Builder()
-                    .url("https://api.openai.com/v1/chat/completions")
+//                    .url("https://api.openai.com/v1/chat/completions")
+                    .url("http://localhost:6000/v1/chat/completions")
                     .post(body)
                     .addHeader("Authorization", "Bearer " + openAiApiKey)
                     .build();
