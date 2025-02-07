@@ -12,22 +12,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/send-email")
 @Validated
 public class EmailController {
-//
-//    @PostMapping("/send-email")
-//    public ResponseEntity<SendEmailResponse> sendEmail(
-//            @Valid @RequestBody SendEmailRequest request) {
-//
-//        // Simulate sending email (you can replace this with actual email sending logic)
-//        String message = String.format(
-//                "Email sent successfully to %s with subject '%s'.",
-//                request.getRecipient(),
-//                request.getSubject()
-//        );
-//
-//        return ResponseEntity.ok(new SendEmailResponse(message));
-//    }
-//}
-
 
     @Autowired
     private EmailService emailService;

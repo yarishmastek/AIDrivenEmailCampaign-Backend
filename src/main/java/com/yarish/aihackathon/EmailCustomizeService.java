@@ -8,6 +8,8 @@ import okhttp3.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.TimeUnit;
+
 @Service
 public class EmailCustomizeService {
 
@@ -16,7 +18,12 @@ public class EmailCustomizeService {
 
     public String customizeEmail(String emailContent, String prompt) {
         try {
-            OkHttpClient client = new OkHttpClient();
+
+            OkHttpClient client = new OkHttpClient.Builder()
+                    .connectTimeout(30, TimeUnit.SECONDS)
+                    .writeTimeout(30, TimeUnit.SECONDS)
+                    .readTimeout(30, TimeUnit.SECONDS)
+                    .build();
 
             // Create OpenAI Request JSON
             ObjectMapper objectMapper = new ObjectMapper();
@@ -38,7 +45,7 @@ public class EmailCustomizeService {
             // Send POST Request to OpenAI
             Request request = new Request.Builder()
 //                    .url("https://api.openai.com/v1/chat/completions")
-                    .url("http://localhost:6000/v1/chat/completions")
+                    .url("http://localhost:6000/v1/chat/completions") // DeepSeek V2 local model
                     .post(body)
                     .addHeader("Authorization", "Bearer " + openAiApiKey)
                     .build();
